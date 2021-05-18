@@ -12,7 +12,7 @@ const Plant = db.define("plant", {
     allowNull: false,
   },
   growthZone: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
     allowNull: false,
   },
   img: {
@@ -32,7 +32,7 @@ const Plant = db.define("plant", {
     allowNull: false
   }, 
   soil: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false
   }, 
   sun: {

@@ -22,7 +22,7 @@ app.use('/plant', controllers.plantController);
 
 ////// Connecting Server to DataBase (PgAdmin)  ///////////////
 dbConnection.authenticate()
-    .then(() => dbConnection.sync())   //{force:true} to drop table (delete all DB data)
+    .then(() => dbConnection.sync({force:true}))   //{force:true} to drop table (delete all DB data)
     .then(() => {
         app.listen(process.env.PORT, () => {
             console.log(`[Server]: App is listening on ${process.env.PORT}.`);

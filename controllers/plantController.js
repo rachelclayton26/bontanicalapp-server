@@ -122,7 +122,7 @@ router.delete("/:id", validateJWTAdmin, async(req, res) => {
 Get ALL PLANT ITEMS - main view
 ====================
 */
-router.get("/", async (req, res) => {
+router.get("/getAll", async (req, res) => {
     try {
       const flower = await PlantModel.findAll();
       res.status(200).json(flower);
@@ -141,9 +141,9 @@ router.get("/id/:id", async (req, res) => {
     const plantDetail = await PlantModel.findOne({
       where: {
         id: req.params.id,
-        //maybe we add an event listener to get the :id once the client side can be connected 
       },
     });
+    console.log(req.params.id)
 
     res.status(200).json({
       message: "Got it!",
@@ -161,12 +161,11 @@ router.get("/id/:id", async (req, res) => {
 Get PLANT BY NAME
 ====================
 */
-router.get("name/:name", async (req, res) => {
+router.get("/name", async (req, res) => {
     try {
       const plantDetail = await PlantModel.findOne({
         where: {
-          name: req.params.commonPlantName,
-          //maybe we add an event listener to get the :id once the client side can be connected 
+          commonPlantName: req.body.plant.commonPlantName,
         },
       });
       console.log(req.params.commonPlantName)
@@ -187,11 +186,11 @@ router.get("name/:name", async (req, res) => {
 Get PLANT BY ZONE
 ====================
 */
-router.get("zone/:zone", async (req, res) => {
+router.get("zone/:growthZone", async (req, res) => {
     try {
-      const plantDetail = await PlantModel.findOne({
+      const plantDetail = await PlantModel.findAll({
         where: {
-          zone: req.params.growthZone,
+          growthZone: req.params.growthZone,
         },
       });
   

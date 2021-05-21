@@ -186,17 +186,24 @@ router.get("/name", async (req, res) => {
 Get PLANT BY ZONE
 ====================
 */
-router.get("zone/:growthZone", async (req, res) => {
+router.get("/zone/:growthZone", async (req, res) => {
     try {
-      const plantDetail = await PlantModel.findAll({
-        where: {
-          growthZone: req.params.growthZone,
-        },
-      });
+      console.log(req.params.growthZone)
+      const plantDetail = await PlantModel.findAll();
+      let plantByZone= []
+      for(let i = 0; i < plantDetail.length; i++) {
+        const numberZone= Number(req.params.growthZone)
+        console.log(numberZone)
+        if(plantDetail[i].growthZone.includes(numberZone)){
+              plantByZone.push(plantDetail[i])
+          }
+      }
+
+      console.log(plantByZone)
   
       res.status(200).json({
         message: "Got it!",
-        plantDetail,
+        plantByZone,
       });
     } catch (err) {
       res.status(500).json({

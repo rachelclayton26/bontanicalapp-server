@@ -101,7 +101,7 @@ router.put("/:id", validateJWTAdmin, async(req, res) => {
 //Rachel
 
 router.delete("/:id", validateJWTAdmin, async(req, res) => {
-  const plantName = req.params.commonPlantName;
+  const plantId = req.params.id;
 
   try{
   const query = {

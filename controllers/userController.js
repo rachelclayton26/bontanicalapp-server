@@ -49,6 +49,7 @@ router.post('/login', async(req, res) => {
             email: email,
         },
     });
+    console.log(loginUser.user)
     if(loginUser){
 
         let passwordComparison = await bcrypt.compare(password, loginUser.password);
@@ -59,7 +60,8 @@ router.post('/login', async(req, res) => {
         res.status(200).json({
             user: loginUser,
             message: "User successfully logged in!",
-            sessionToken: token
+            sessionToken: token,
+            // isAdmin: loginUser.user.dataValues.isAdmin,
     }); 
     } else {
     res.status(401).json({

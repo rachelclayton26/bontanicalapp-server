@@ -18,11 +18,11 @@ const validateJWTAdmin = (req, res, next) => {
         .then(user => {
           console.log(user.isAdmin)
           req.user = user;
-          if (user.isAdmin === true) {
+          if (user) {
             next();
           } else {
             res.status(401).json({
-              message: 'Not an admin'
+              message: 'Not an user'
             })
           }
         }).catch(err => {

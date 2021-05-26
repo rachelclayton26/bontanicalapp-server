@@ -40,10 +40,15 @@ router.post('/create', validateJWTAdmin, async (req, res) => {
       description
       // owner: id
   }
+  plantEntry.growthZone = growthZone.split(",").map(s => {
+    return isNaN(parseInt(s)) ? 0: parseInt(s)
+  })
+
   try {
       const newPlant = await PlantModel.create(plantEntry);
       res.status(200).json(newPlant);
   } catch (err) {
+      console.log(err, plantEntry)
       res.status(500).json({error: err});
   }
   
@@ -83,6 +88,10 @@ router.put("/:id", validateJWTAdmin, async(req, res) => {
           color,
           description
       };
+
+      updatedPlant.growthZone = growthZone.split(",").map(s => {
+        return isNaN(parseInt(s)) ? 0: parseInt(s)
+      })
 
       try {
           const update = await PlantModel.update(updatedPlant, query);

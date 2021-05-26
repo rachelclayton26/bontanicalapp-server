@@ -3,8 +3,18 @@ const router = require('express').Router();
 const {UserModel} = require('../models');
 const { UniqueConstraintError } = require('sequelize/lib/errors');
 const jwt = require("jsonwebtoken");
+let validateJWTAdmin = require('../middleware/validate-jwt');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+
+
+/////////////// CHECK LOGGED-IN ? //////////////
+
+router.get("/", validateJWTAdmin, (req, res) => {
+    res.status(200).json({
+      user: req.user,
+    });
+  });
 
 /////// REGISTER USER - POST /////////////
 router.post("/register", async(req, res) => {

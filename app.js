@@ -19,6 +19,7 @@ app.use('/user', controllers.userController);
 // app.use(require('./middleware/validate-jwt-admin'));
 // app.use(require('./middleware/validate-jwt'));   ///<--- validate sessions
 app.use('/plant', controllers.plantController);
+app.use('/favorite', controllers.favoriteController);
 
 ////// Connecting Server to DataBase (PgAdmin)  ///////////////
 dbConnection.authenticate()

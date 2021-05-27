@@ -35,14 +35,13 @@ router.post('/addfav', validateJWTAdmin, async (req, res) => {
   ====================
   */
 
-  router.get("/getfav/:userId", async (req, res) => {
+  router.get("/getfav", validateJWTAdmin, async (req, res) => {
     try {
       const favPlants = await FavModel.findAll({
         where: {
-          userId: req.params.userId,
+          userId: req.user.id,
         },
       });
-      console.log(req.params.id)
   
       res.status(200).json({
         message: "Got it!",

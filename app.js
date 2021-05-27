@@ -1,9 +1,11 @@
 require('dotenv').config();
 const Express =require('express');
+var cors = require('cors');
 const app = Express();
 const dbConnection = require('./db');
 
 app.use(Express.json());   ///////////MUST go above any routes - tells the app we want to use json in our request///////
+app.use(cors());
 
 const controllers = require('./controllers');
 
